@@ -1,7 +1,7 @@
 {
-  "name": "nabny-hr-enterprise-v18-4-final",
+  "name": "nabny-hr-v18-7-whitelabel-license",
   "private": true,
-  "version": "18.4.0",
+  "version": "18.7.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -13,9 +13,9 @@
     "vite": "latest",
     "react": "latest",
     "react-dom": "latest",
-    "@supabase/supabase-js": "latest",
     "lucide-react": "latest",
-    "recharts": "latest"
+    "recharts": "latest",
+    "@supabase/supabase-js": "latest"
   },
   "devDependencies": {}
 }

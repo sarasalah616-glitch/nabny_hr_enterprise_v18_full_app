@@ -1,34 +1,20 @@
-# Nabny HR Enterprise V18.4 Final
+# Nabny HR V18.7 White Label + License
 
-نسخة Enterprise نهائية مبدئية لشركة نبني للمقاولات.
+## الجديد
+- إعدادات White Label: اسم النظام، اسم الشركة، النشاط، اللوجو، الخلفية المائية
+- نسخة لشركة أخرى من داخل الإعدادات
+- Trial Mode + Activation Code
+- مولد أكواد تفعيل محلي
+- Smart Forms مرتبطة بمحتوى مختلف لكل نموذج
+- Employee App
+- GPS Attendance
+- Payroll Engine
 
-## أهم المزايا
-- Login users محلي للتجربة + جاهز Supabase Auth
-- صلاحيات: Admin / HR / Manager / Employee
-- تطبيق موظف منفصل داخل نفس النظام
-- مواقع عمل متعددة
-- تحديد مسافة البصمة لكل موقع
-- بصمة حضور وانصراف حسب GPS
-- رفض البصمة خارج النطاق
-- طلبات الموظف: إجازة، إذن، سلفة، مهمة عمل، مباشرة عمل
-- إشعارات داخل النظام
-- Queue لإيميلات النظام
-- Payroll Engine: راتب أساسي، بدلات، غياب، تأخير، إضافي، صافي الراتب
-- نماذج ذكية باسم شركة نبني فقط بدون ذكر اسم السيستم داخل النموذج
-- إدارة موظفين فعلية بدون أسماء وهمية
-- حفظ LocalStorage للتجربة + Schema Supabase كامل
+## دخول تجريبي
+- admin / 123456
+- hr / 123456
+- manager / 123456
+- employee / 123456
 
-## التشغيل
-npm install
-npm run dev
-
-## Vercel
-Framework: Vite
-Root Directory: ./
-Build Command: npm run build
-Output Directory: dist
-
-## Supabase
-شغل:
-supabase/schema.sql
-supabase/rls.sql
+## ملاحظة تجارية مهمة
+التفعيل المحلي جيد كبداية، لكن النسخة التجارية النهائية يجب أن تجعل التفعيل عبر Supabase Edge Function أو API Server.
