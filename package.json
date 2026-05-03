@@ -1,7 +1,7 @@
 {
-  "name": "nabny-hr-enterprise-v18",
+  "name": "nabny-hr-enterprise-v18-4-final",
   "private": true,
-  "version": "18.2.0",
+  "version": "18.4.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -16,5 +16,6 @@
     "@supabase/supabase-js": "latest",
     "lucide-react": "latest",
     "recharts": "latest"
-  }
+  },
+  "devDependencies": {}
 }
