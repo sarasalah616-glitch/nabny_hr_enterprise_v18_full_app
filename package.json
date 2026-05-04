@@ -1,7 +1,7 @@
 {
-  "name": "nabny-hr-v18-7-whitelabel-license",
+  "name": "nabny-hr-v18-8-payroll-forms",
   "private": true,
-  "version": "18.7.0",
+  "version": "18.8.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
