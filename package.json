@@ -1,7 +1,7 @@
 {
-  "name": "nabny-hr-v18-9-smart-attendance-payroll",
+  "name": "nabny-hr-v19-0-ai-gps-whatsapp",
   "private": true,
-  "version": "18.9.0",
+  "version": "19.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",

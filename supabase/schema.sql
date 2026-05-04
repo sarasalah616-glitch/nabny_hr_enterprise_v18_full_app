@@ -10,3 +10,39 @@ create table if not exists license_keys (
   is_active boolean default true,
   created_at timestamptz default now()
 );
+
+
+-- V19.0 additions
+create table if not exists project_locations (
+  id text primary key,
+  name text not null,
+  project text,
+  lat numeric not null,
+  lng numeric not null,
+  radius numeric default 100,
+  manager_phone text,
+  created_at timestamp with time zone default now()
+);
+
+create table if not exists whatsapp_queue (
+  id text primary key,
+  to_phone text,
+  title text,
+  message text,
+  status text default 'ready',
+  provider text default 'WhatsApp Official Cloud API',
+  created_at timestamp with time zone default now(),
+  sent_at timestamp with time zone
+);
+
+create table if not exists rules_engine (
+  id text primary key,
+  name text not null,
+  metric text not null,
+  operator text not null,
+  value numeric default 0,
+  action text not null,
+  amount numeric default 0,
+  active boolean default true,
+  created_at timestamp with time zone default now()
+);
