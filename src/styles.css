@@ -18,3 +18,5 @@ input,select,textarea{width:100%;border:1px solid #dbe3ef;background:#fff;border
 .locked{filter:grayscale(.2);opacity:.75;pointer-events:none}
 @media(max-width:1000px){.layout{grid-template-columns:1fr}.grid4,.grid3,.grid2,.formGrid{grid-template-columns:1fr}.header{border-radius:0;margin-top:0}}
 @media print{.header,.sidebar,.noPrint{display:none!important}.layout{display:block;margin:0;padding:0}.card{box-shadow:none;border:0;padding:0}.paper{box-shadow:none;border:0;border-radius:0;max-width:none;min-height:100vh}}
+.modal{position:fixed;inset:0;background:rgba(15,23,42,.35);display:flex;align-items:center;justify-content:center;z-index:50;padding:20px}
+.modalCard{background:#fff;border-radius:22px;padding:24px;max-width:560px;width:100%;box-shadow:0 20px 50px rgba(15,23,42,.25);line-height:2}

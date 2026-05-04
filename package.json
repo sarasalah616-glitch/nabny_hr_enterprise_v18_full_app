@@ -1,7 +1,7 @@
 {
-  "name": "nabny-hr-v18-8-payroll-forms",
+  "name": "nabny-hr-v18-9-smart-attendance-payroll",
   "private": true,
-  "version": "18.8.0",
+  "version": "18.9.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
