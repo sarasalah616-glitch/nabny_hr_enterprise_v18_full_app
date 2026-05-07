@@ -1,98 +1,15 @@
-import React from "react";
-import {
-  getDocumentStatus,
-  getDaysToExpiry,
-} from "../features/documents/documentTypes";
+import React,{useMemo,useState}from'react';
+import { Upload, FileText, Bell, CheckCircle, Trash2, Languages } from 'lucide-react';
+import { useAppStore } from '../store/useAppStore';
 
-const mockDocuments = [
-  {
-    id: 1,
-    name: "إقامة الموظف",
-    owner: "محمد أحمد",
-    expiryDate: "2026-06-15",
-  },
-  {
-    id: 2,
-    name: "استمارة السيارة",
-    owner: "سيارة فورد",
-    expiryDate: "2026-05-05",
-  },
-  {
-    id: 3,
-    name: "السجل التجاري",
-    owner: "شركة نبني",
-    expiryDate: "2026-04-20",
-  },
-];
-
-export default function DocumentsCenter() {
-  return (
-    <div style={{ padding: 24 }}>
-      <h1>مركز المستندات</h1>
-
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(auto-fit,minmax(300px,1fr))",
-          gap: 16,
-          marginTop: 20,
-        }}
-      >
-        {mockDocuments.map((doc) => {
-          const status = getDocumentStatus(doc.expiryDate);
-          const days = getDaysToExpiry(doc.expiryDate);
-
-          return (
-            <div
-              key={doc.id}
-              style={{
-                border: "1px solid #ddd",
-                borderRadius: 12,
-                padding: 16,
-                background: "#fff",
-              }}
-            >
-              <h3>{doc.name}</h3>
-
-              <p>{doc.owner}</p>
-
-              <p>
-                تاريخ الانتهاء:
-                {" "}
-                {doc.expiryDate}
-              </p>
-
-              <p>
-                متبقي:
-                {" "}
-                {days}
-                {" "}
-                يوم
-              </p>
-
-              <div
-                style={{
-                  marginTop: 12,
-                  padding: "6px 12px",
-                  borderRadius: 8,
-                  background:
-                    status === "expired"
-                      ? "#ff4d4f"
-                      : status === "critical"
-                      ? "#fa8c16"
-                      : status === "warning"
-                      ? "#fadb14"
-                      : "#52c41a",
-                  color: "#fff",
-                  width: "fit-content",
-                }}
-              >
-                {status}
-              </div>
-            </div>
-          );
-        })}
-      </div>
-    </div>
-  );
-}
+const labels={
+  ar:{title:'مركز المستندات والملفات',upload:'رفع مستند',ownerType:'الجهة',ownerName:'اسم الجهة',docType:'نوع المستند',docTitle:'اسم المستند',expiry:'تاريخ الانتهاء',file:'الملف',save:'حفظ المستند',alerts:'تنبيهات الانتهاء',all:'كل المستندات',renew:'تجديد',delete:'حذف',days:'يوم',notes:'ملاحظات'},
+  en:{title:'Documents & Files Center',upload:'Upload Document',ownerType:'Owner Type',ownerName:'Owner Name',docType:'Document Type',docTitle:'Document Title',expiry:'Expiry Date',file:'File',save:'Save Document',alerts:'Expiry Alerts',all:'All Documents',renew:'Renew',delete:'Delete',days:'days',notes:'Notes'},
+  ur:{title:'دستاویزات اور فائلز سینٹر',upload:'دستاویز اپ لوڈ',ownerType:'مالک کی قسم',ownerName:'مالک کا نام',docType:'دستاویز کی قسم',docTitle:'دستاویز کا نام',expiry:'ختم ہونے کی تاریخ',file:'فائل',save:'محفوظ کریں',alerts:'ایکسپائری الرٹس',all:'تمام دستاویزات',renew:'تجدید',delete:'حذف',days:'دن',notes:'نوٹس'},
+  bn:{title:'ডকুমেন্ট ও ফাইল সেন্টার',upload:'ডকুমেন্ট আপলোড',ownerType:'মালিকের ধরন',ownerName:'মালিকের নাম',docType:'ডকুমেন্ট টাইপ',docTitle:'ডকুমেন্ট নাম',expiry:'মেয়াদ শেষের তারিখ',file:'ফাইল',save:'সেভ ডকুমেন্ট',alerts:'মেয়াদ সতর্কতা',all:'সব ডকুমেন্ট',renew:'রিনিউ',delete:'ডিলিট',days:'দিন',notes:'নোট'}
+};
+const ownerTypes=['company','employee','vehicle','equipment','project','supplier','contract'];
+const docTypes=['سجل تجاري','إقامة','جواز','رخصة عمل','تأمين طبي','عقد','استمارة مركبة','تأمين مركبة','فحص دوري','شهادة محتوى محلي','رخصة بلدية','زكاة وضريبة','ملف هندسي','فاتورة','أخرى'];
+function readFile(file){return new Promise((resolve,reject)=>{if(!file)return resolve({});const r=new FileReader();r.onload=()=>resolve({fileName:file.name,fileType:file.type||'unknown',fileSize:file.size,fileData:r.result});r.onerror=reject;r.readAsDataURL(file);});}
+function alertClass(days){if(days<0)return 'badge red'; if(days<=7)return 'badge red'; if(days<=30)return 'badge yellow'; if(days<=90)return 'badge blue'; return 'badge green';}
+export default function DocumentsCenter(){const s=useAppStore();const settings=s.getSettings();const lang=settings.language||'ar';const t=labels[lang]||labels.ar;const d=s.getTenantData();const alerts=s.getDocumentAlerts();const[form,setForm]=useState({ownerType:'company',ownerName:'شركة نبني للمقاولات',documentType:'إقامة',title:'',issueDate:'',expiryDate:'',notes:''});const[busy,setBusy]=useState(false);const stats=useMemo(()=>({total:(d.documents||[]).length,alerts:alerts.length,expired:alerts.filter(x=>x.daysToExpire<0).length,critical:alerts.filter(x=>x.daysToExpire>=0&&x.daysToExpire<=7).length}),[d.documents,alerts]);const save=async()=>{try{setBusy(true);const file=document.getElementById('document-file')?.files?.[0];const fileMeta=await readFile(file);s.upsertDocument({...form,...fileMeta});setForm({ownerType:'company',ownerName:'',documentType:'إقامة',title:'',issueDate:'',expiryDate:'',notes:''});const el=document.getElementById('document-file');if(el)el.value='';}catch(e){alert(e.message)}finally{setBusy(false)}};return <div className="card"><div className="pageTitle"><h2><FileText/> {t.title}</h2><span className="badge"><Languages size={16}/> {lang.toUpperCase()}</span></div><div className="grid"><div className="card stat"><h3>{t.all}</h3><h1>{stats.total}</h1><p className="muted">Files archive</p></div><div className="card stat"><h3>{t.alerts}</h3><h1>{stats.alerts}</h1><p className="muted">90 days window</p></div><div className="card stat"><h3>Critical</h3><h1>{stats.critical}</h1><p className="muted">≤ 7 days</p></div><div className="card stat"><h3>Expired</h3><h1>{stats.expired}</h1><p className="muted">Overdue</p></div></div><h3><Upload size={18}/> {t.upload}</h3><div className="settingsGrid"><label>{t.ownerType}<select value={form.ownerType} onChange={e=>setForm({...form,ownerType:e.target.value})}>{ownerTypes.map(x=><option key={x} value={x}>{x}</option>)}</select></label><label>{t.ownerName}<input className="input" value={form.ownerName} onChange={e=>setForm({...form,ownerName:e.target.value})}/></label><label>{t.docType}<select value={form.documentType} onChange={e=>setForm({...form,documentType:e.target.value})}>{docTypes.map(x=><option key={x}>{x}</option>)}</select></label><label>{t.docTitle}<input className="input" value={form.title} onChange={e=>setForm({...form,title:e.target.value})}/></label><label>Issue Date<input className="input" type="date" value={form.issueDate} onChange={e=>setForm({...form,issueDate:e.target.value})}/></label><label>{t.expiry}<input className="input" type="date" value={form.expiryDate} onChange={e=>setForm({...form,expiryDate:e.target.value})}/></label><label>{t.file}<input id="document-file" className="input" type="file" accept=".pdf,.doc,.docx,.xls,.xlsx,.png,.jpg,.jpeg,.zip,.dwg,.txt"/></label><label>{t.notes}<input className="input" value={form.notes} onChange={e=>setForm({...form,notes:e.target.value})}/></label></div><div className="actions"><button className="btn green" disabled={busy} onClick={save}><Upload size={16}/> {busy?'...':t.save}</button><button className="btn light" onClick={()=>s.generateDocumentNotifications()}><Bell size={16}/> Generate Alerts</button></div><h3>{t.alerts}</h3>{alerts.length?<div className="timeline">{alerts.map(a=><div className="tl" key={a.id}><b>{a.title}</b> <span className={alertClass(a.daysToExpire)}>{a.daysToExpire<0?`Expired ${Math.abs(a.daysToExpire)}`:`${a.daysToExpire} ${t.days}`}</span><p>{a.documentType} - {a.ownerName} - {a.expiryDate}</p></div>)}</div>:<div className="empty">لا توجد مستندات قريبة الانتهاء خلال 90 يوم.</div>}<h3>{t.all}</h3><table className="table"><thead><tr><th>{t.docTitle}</th><th>{t.ownerName}</th><th>{t.docType}</th><th>{t.expiry}</th><th>{t.file}</th><th>Actions</th></tr></thead><tbody>{(d.documents||[]).map(doc=><tr key={doc.id}><td>{doc.title}</td><td>{doc.ownerName}</td><td>{doc.documentType}</td><td>{doc.expiryDate}</td><td>{doc.fileData?<a href={doc.fileData} download={doc.fileName}>{doc.fileName}</a>:(doc.fileName||'-')}</td><td><button className="btn light" onClick={()=>{const next=prompt('New expiry date YYYY-MM-DD',doc.expiryDate); if(next)s.renewDocument(doc.id,next)}}><CheckCircle size={15}/> {t.renew}</button> <button className="btn red" onClick={()=>confirm('Delete document?')&&s.deleteDocument(doc.id)}><Trash2 size={15}/> {t.delete}</button></td></tr>)}</tbody></table></div>}
