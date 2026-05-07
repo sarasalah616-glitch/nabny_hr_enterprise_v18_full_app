@@ -1,7 +1,7 @@
 {
-  "name": "nabny-hr-v19-0-ai-gps-whatsapp",
+  "name": "nabny-os-v24-operations-intelligence",
   "private": true,
-  "version": "19.0.0",
+  "version": "24.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -9,13 +9,16 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@vitejs/plugin-react": "latest",
-    "vite": "latest",
-    "react": "latest",
-    "react-dom": "latest",
-    "lucide-react": "latest",
-    "recharts": "latest",
-    "@supabase/supabase-js": "latest"
+    "@vitejs/plugin-react": "^4.3.0",
+    "vite": "^5.4.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "lucide-react": "^0.441.0",
+    "recharts": "^2.13.0",
+    "@supabase/supabase-js": "^2.45.0",
+    "zustand": "^4.5.5",
+    "date-fns": "^3.6.0",
+    "framer-motion": "^11.3.0"
   },
   "devDependencies": {}
 }
