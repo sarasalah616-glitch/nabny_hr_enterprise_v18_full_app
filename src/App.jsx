@@ -8,7 +8,7 @@ import AIAssistant from './pages/AIAssistant';
 import Attendance from './pages/Attendance';
 import Payroll from './pages/Payroll';
 import LiveMap from './pages/LiveMap';
-import { Risk, Timeline, Employees, Requests, Reports, Notifications, SettingsPage, SaaSAdmin, TenantSwitcher, Procurement, Contracts, Assets, ExecutiveBrief } from './pages/MorePages';
+import { Risk, Timeline, Employees, Requests, Reports, Notifications, SettingsPage, SaaSAdmin, TenantSwitcher, Procurement, Contracts, Assets, ExecutiveBrief, Documents } from './pages/MorePages';
 
 export default function App(){
   const currentUser=useAppStore(s=>s.currentUser);
@@ -21,7 +21,7 @@ export default function App(){
     <Header/>
     <div className="tenantBar"><b>{getTenant()?.name}</b><span>{getTenant()?.plan} - {getTenant()?.subscriptionStatus}</span><TenantSwitcher/></div>
     <div className="layout"><Sidebar tab={tab} setTab={setTab}/><main>
-      {tab==='dashboard'&&<Dashboard/>}{tab==='ownerAI'&&<OwnerAI/>}{tab==='aiAssistant'&&<AIAssistant/>}{tab==='liveMap'&&<LiveMap/>}{tab==='risk'&&<Risk/>}{tab==='timeline'&&<Timeline/>}{tab==='employees'&&<Employees/>}{tab==='attendance'&&<Attendance/>}{tab==='payroll'&&<Payroll/>}{tab==='requests'&&<Requests/>}{tab==='procurement'&&<Procurement/>}{tab==='contracts'&&<Contracts/>}{tab==='assets'&&<Assets/>}{tab==='executiveBrief'&&<ExecutiveBrief/>}{tab==='reports'&&<Reports/>}{tab==='notifications'&&<Notifications/>}{tab==='settings'&&<SettingsPage/>}{tab==='saasAdmin'&&<SaaSAdmin/>}
+      {tab==='dashboard'&&<Dashboard/>}{tab==='ownerAI'&&<OwnerAI/>}{tab==='aiAssistant'&&<AIAssistant/>}{tab==='liveMap'&&<LiveMap/>}{tab==='risk'&&<Risk/>}{tab==='timeline'&&<Timeline/>}{tab==='employees'&&<Employees/>}{tab==='documents'&&<Documents/>}{tab==='attendance'&&<Attendance/>}{tab==='payroll'&&<Payroll/>}{tab==='requests'&&<Requests/>}{tab==='procurement'&&<Procurement/>}{tab==='contracts'&&<Contracts/>}{tab==='assets'&&<Assets/>}{tab==='executiveBrief'&&<ExecutiveBrief/>}{tab==='reports'&&<Reports/>}{tab==='notifications'&&<Notifications/>}{tab==='settings'&&<SettingsPage/>}{tab==='saasAdmin'&&<SaaSAdmin/>}
     </main></div><div className="watermark">{settings.watermark}</div></div>
 }
 function Login({settings}){
