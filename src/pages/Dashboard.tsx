@@ -14,10 +14,14 @@ function Stat({ title, value, icon: Icon, note, color = '#991b1b' }: { title: st
 }
 
 export default function Dashboard() {
-  const d = useAppStore(s => s.getTenantData());
-  const health = useAppStore(s => s.getCompanyHealth());
-  const risks = useAppStore(s => s.getRisks());
-  const tenant = useAppStore(s => s.getTenant());
+  const getTenantData = useAppStore(s => s.getTenantData);
+  const getCompanyHealth = useAppStore(s => s.getCompanyHealth);
+  const getRisks = useAppStore(s => s.getRisks);
+  const getTenant = useAppStore(s => s.getTenant);
+  const d = getTenantData();
+  const health = getCompanyHealth();
+  const risks = getRisks();
+  const tenant = getTenant();
   const tenants = useAppStore(s => s.tenants);
   const currentUser = useAppStore(s => s.currentUser);
   const today = new Date().toISOString().slice(0, 10);

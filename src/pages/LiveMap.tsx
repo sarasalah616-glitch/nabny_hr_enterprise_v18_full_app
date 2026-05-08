@@ -2,7 +2,8 @@ import { MapPin, Clock, Workflow, Users } from 'lucide-react';
 import { useAppStore } from '../store/useAppStore';
 
 export default function LiveMap() {
-  const d = useAppStore(s => s.getTenantData());
+  const getTenantData = useAppStore(s => s.getTenantData);
+  const d = getTenantData();
   const today = new Date().toISOString().slice(0, 10);
 
   return (
