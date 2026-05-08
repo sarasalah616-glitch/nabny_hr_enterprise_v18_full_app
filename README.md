@@ -1,32 +1,20 @@
-# NABNY OS Enterprise — Operations Intelligence Platform
+# NABNY OS V23 SaaS Core
 
-نسخة Enterprise محسنة من نظام NABNY OS لإدارة شركات المقاولات والصيانة والتشغيل.
+نسخة V23 تحول النظام إلى بنية SaaS أولية قابلة للبيع:
 
-## المميزات الحالية
-- React + Vite + Zustand.
-- Multi-Tenant SaaS.
-- Login / Logout.
-- Dashboard تنفيذي.
-- HR + Attendance GPS + Payroll.
-- Procurement + Contracts + Assets.
-- Documents Center: رفع ملفات، أرشفة، تنبيهات انتهاء.
-- AI Operations Intelligence مبدئي داخل النظام.
-- دعم لغات: عربي، English، اردو، বাংলা.
-- Notifications + Audit Log.
+- Multi-Tenant: كل شركة لها `tenantId` وبيانات منفصلة.
+- White Label لكل شركة: اسم النظام، الهوية، الألوان، الخلفية، اللوجو.
+- SaaS Admin للمالك: إدارة الشركات، الاشتراكات، المستخدمين، الإيقاف والتفعيل.
+- عزل بيانات الموظفين، المشاريع، الحضور، الطلبات، البيرول، الإشعارات، وAudit حسب الشركة الحالية.
+- AI Assistant يقرأ بيانات Tenant الحالي فقط.
+- Payroll وAttendance وReports تم ربطها بعزل الشركات.
 
-## التشغيل المحلي
-```bash
-npm install
-npm run dev
-```
+## بيانات الدخول التجريبية
 
-## بيانات الدخول
-- admin / 123456
-- owner / 123456
-- hr / 123456
-- manager / 123456
-- employee / 123456
+- مالك المنصة: `owner / 123456`
+- شركة نبني: `admin / 123456`
+- HR: `hr / 123456`
+- مدير موقع: `manager / 123456`
+- شركة تجريبية: اختر شركة تجريبية ثم `demo / 123456`
 
-## النشر على Vercel
-- ارفع المشروع بدون node_modules وبدون dist.
-- Vercel سيشغل npm install ثم npm run build.
+> ملاحظة: هذه نسخة Frontend SaaS Core محلية باستخدام Zustand Persist. للـ Production الحقيقي على الإنترنت يلزم ربط Supabase/PostgreSQL + RLS + Auth + Edge Functions + Payment Gateway.

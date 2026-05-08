@@ -6,5 +6,3 @@
 .briefBox{background:linear-gradient(135deg,#fff7ed,#fffbeb);border:1px solid #fed7aa;border-radius:22px;padding:18px;margin:16px 0}
 .dangerRow{background:#fef2f2}
 .table td .btn{margin-inline:2px}
-.pageTitle{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}.pageTitle h2{display:flex;align-items:center;gap:10px}.langSwitch{display:flex;align-items:center;gap:6px;background:rgba(255,255,255,.15);padding:6px;border-radius:14px}.miniLang{border:0;border-radius:10px;padding:6px 9px;background:rgba(255,255,255,.18);color:white;font-weight:800;cursor:pointer}.miniLang.active{background:white;color:var(--primary)}
-.table a{color:var(--secondary);font-weight:bold}.card.stat svg{color:var(--secondary)}
