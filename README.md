@@ -33,4 +33,3 @@ npm run dev
 
 ## ملاحظة مهمة
 لا ترفع مجلد `node_modules` ولا `dist` إلى GitHub. Vercel سيقوم بتثبيت الحزم وبناء النسخة تلقائيًا.
-v25 redeploy
