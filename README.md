@@ -1,20 +1,35 @@
-# NABNY OS V23 SaaS Core
+# NABNY OS v25 Enterprise Command Center
 
-نسخة V23 تحول النظام إلى بنية SaaS أولية قابلة للبيع:
+نسخة إنتاجية مطورة من NABNY OS مبنية على React + Vite.
 
-- Multi-Tenant: كل شركة لها `tenantId` وبيانات منفصلة.
-- White Label لكل شركة: اسم النظام، الهوية، الألوان، الخلفية، اللوجو.
-- SaaS Admin للمالك: إدارة الشركات، الاشتراكات، المستخدمين، الإيقاف والتفعيل.
-- عزل بيانات الموظفين، المشاريع، الحضور، الطلبات، البيرول، الإشعارات، وAudit حسب الشركة الحالية.
-- AI Assistant يقرأ بيانات Tenant الحالي فقط.
-- Payroll وAttendance وReports تم ربطها بعزل الشركات.
+## أهم التحديثات
+- AI Assistant تنفيذي داخل النظام.
+- نماذج HR ذكية بتعبئة تلقائية: سلفة، إجازة، تجديد إقامة، تجديد جواز، خطاب تعريف.
+- مركز ملفات الموظفين مع رفع ملفات وتنبيهات انتهاء الوثائق.
+- تطبيق موظف بثلاث لغات: عربي، English، اردو.
+- إعدادات وقت البصمة للحضور والانصراف مع GPS اختياري/إجباري.
+- أقسام الشركة: الإدارة، الموارد البشرية، المالية، المشتريات، الإنشاءات، الصيانة، التشغيل.
+- تقارير شهرية وأرشفة الحركات حسب الشهر.
+- صلاحيات وأدوار: owner, admin, hr, manager, employee.
 
 ## بيانات الدخول التجريبية
+- admin / 123456
+- owner / 123456
+- hr / 123456
+- manager / 123456
+- employee / 123456
 
-- مالك المنصة: `owner / 123456`
-- شركة نبني: `admin / 123456`
-- HR: `hr / 123456`
-- مدير موقع: `manager / 123456`
-- شركة تجريبية: اختر شركة تجريبية ثم `demo / 123456`
+## إعدادات Vercel
+- Framework Preset: Vite
+- Install Command: `npm install`
+- Build Command: `npm run build`
+- Output Directory: `dist`
 
-> ملاحظة: هذه نسخة Frontend SaaS Core محلية باستخدام Zustand Persist. للـ Production الحقيقي على الإنترنت يلزم ربط Supabase/PostgreSQL + RLS + Auth + Edge Functions + Payment Gateway.
+## تشغيل محلي
+```bash
+npm install
+npm run dev
+```
+
+## ملاحظة مهمة
+لا ترفع مجلد `node_modules` ولا `dist` إلى GitHub. Vercel سيقوم بتثبيت الحزم وبناء النسخة تلقائيًا.
